@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="台股雷達" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#07111f" />
   <title>台股雷達 Stock Radar</title>
   <link rel="manifest" href="./manifest.json" />
   <link rel="icon" href="./icon.svg" type="image/svg+xml" />
@@ -14,134 +14,186 @@
 </head>
 <body>
   <div id="app" class="app-shell">
-    <header class="app-header" aria-label="App header">
-      <div class="brand">
-        <div class="brand-icon" aria-hidden="true">📈</div>
-        <div class="brand-text">
+    <header class="top-bar" aria-label="資料狀態列">
+      <div class="title-block">
+        <div class="logo-mark" aria-hidden="true">SR</div>
+        <div class="title-copy">
           <h1>台股雷達</h1>
-          <p id="dataStatus">資料讀取中...</p>
+          <p>Stock Radar</p>
         </div>
       </div>
-      <div class="header-actions">
-        <button id="versionBadge" class="version-badge" type="button" aria-label="檢查版本">V1_3</button>
-        <button id="themeToggle" class="icon-button" type="button" aria-label="切換主題">🌙</button>
+      <div class="status-block">
+        <div id="dataUpdatedAt" class="data-time">資料更新：讀取中</div>
+        <div id="appUpdatedAt" class="app-time">版本 V1_4</div>
+      </div>
+      <div class="top-actions">
+        <button id="checkUpdateBtn" class="round-btn" type="button" aria-label="檢查更新">↻</button>
+        <button id="themeToggle" class="round-btn" type="button" aria-label="切換主題">◐</button>
       </div>
     </header>
 
-    <main class="app-main" id="mainScroll">
-      <section id="viewFilter" class="view active" aria-labelledby="filterTitle">
-        <section class="summary-card compact-summary" aria-label="資料總覽">
-          <div>
-            <p class="eyebrow">全市場資料</p>
-            <h2 id="marketSummary">上市 / 上櫃 / ETF</h2>
-            <p id="coverageText">等待資料更新</p>
+    <main id="mainScroll" class="app-main">
+      <section id="viewFilter" class="view active" aria-labelledby="filterHeading">
+        <section class="dashboard-strip" aria-label="市場資料摘要">
+          <div class="stat-cell wide">
+            <span>資料範圍</span>
+            <strong id="marketSummary">全市場股票 / ETF</strong>
           </div>
-          <button id="reloadDataBtn" type="button" class="ghost-button">重載</button>
+          <div class="stat-cell">
+            <span>總檔數</span>
+            <strong id="totalCountText">-</strong>
+          </div>
+          <div class="stat-cell">
+            <span>已選</span>
+            <strong id="selectedCountText">0</strong>
+          </div>
         </section>
 
-        <section class="filter-toolbar" aria-label="篩選模式">
-          <label>
-            <span>符合模式</span>
-            <select id="modeSelect">
-              <option value="AND">全部符合</option>
-              <option value="OR">任一符合</option>
-              <option value="SCORE">依符合數排序</option>
-            </select>
-          </label>
-          <label>
-            <span>市場</span>
-            <select id="marketSelect">
-              <option value="ALL">全部市場</option>
-              <option value="TWSE">上市</option>
-              <option value="TPEX">上櫃</option>
-            </select>
-          </label>
-          <label>
-            <span>商品</span>
-            <select id="typeSelect">
-              <option value="ALL">股票 + ETF</option>
-              <option value="STOCK">股票</option>
-              <option value="ETF">ETF</option>
-            </select>
-          </label>
+        <section class="control-panel" aria-label="基本篩選條件">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Scanner</p>
+              <h2 id="filterHeading">篩選條件</h2>
+            </div>
+            <button id="clearFilterInlineBtn" class="text-btn" type="button">清空</button>
+          </div>
+
+          <div class="selector-grid">
+            <label class="field">
+              <span>符合模式</span>
+              <select id="modeSelect">
+                <option value="AND">全部符合</option>
+                <option value="OR">任一符合</option>
+                <option value="SCORE">符合數排序</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>市場</span>
+              <select id="marketSelect">
+                <option value="ALL">全部</option>
+                <option value="TWSE">上市</option>
+                <option value="TPEX">上櫃</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>商品</span>
+              <select id="typeSelect">
+                <option value="ALL">股票 + ETF</option>
+                <option value="STOCK">股票</option>
+                <option value="ETF">ETF</option>
+              </select>
+            </label>
+          </div>
         </section>
 
-        <div id="filterGroups" class="filter-groups"></div>
+        <section class="condition-board" aria-label="分類篩選條件">
+          <div id="filterGroups" class="condition-groups"></div>
+        </section>
 
-        <button id="runFilterBtn" class="primary-action" type="button">
-          <span aria-hidden="true">🔍</span>
-          開始篩選全市場股票 / ETF
-        </button>
+        <div class="filter-spacer" aria-hidden="true"></div>
       </section>
 
-      <section id="viewResults" class="view" aria-labelledby="resultTitle">
-        <div class="result-header compact-result-header">
-          <div>
-            <p class="eyebrow">篩選結果</p>
-            <h2 id="resultTitle">尚未篩選</h2>
-            <p id="resultSubtitle">請先選擇條件</p>
+      <section id="viewResults" class="view" aria-labelledby="resultHeading">
+        <section class="result-control">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Results</p>
+              <h2 id="resultHeading">篩選結果</h2>
+              <p id="resultSubtitle">請先選擇條件或直接查看全市場。</p>
+            </div>
+            <button id="clearFilterBtn" class="text-btn" type="button">重設</button>
           </div>
-          <button id="clearFilterBtn" type="button" class="ghost-button">清除</button>
-        </div>
 
-        <div class="search-row">
-          <input id="searchInput" type="search" placeholder="搜尋代號 / 名稱，例如 2330、0050" autocomplete="off" />
-          <select id="sortSelect" aria-label="排序">
-            <option value="score">符合度</option>
-            <option value="changePercent">漲跌幅</option>
-            <option value="volume">成交量</option>
-            <option value="amount">成交金額</option>
-            <option value="rs">RS</option>
-            <option value="code">代號</option>
-          </select>
-        </div>
+          <div class="search-grid">
+            <label class="search-field">
+              <span>搜尋</span>
+              <input id="searchInput" type="search" placeholder="輸入 2330、台積電、0050" autocomplete="off" />
+            </label>
+            <label class="field sort-field">
+              <span>排序</span>
+              <select id="sortSelect" aria-label="排序">
+                <option value="score">符合度</option>
+                <option value="changePercent">漲跌幅</option>
+                <option value="volume">成交量</option>
+                <option value="amount">成交金額</option>
+                <option value="rs">RS</option>
+                <option value="code">代號</option>
+              </select>
+            </label>
+          </div>
 
-        <div id="activeChips" class="active-chips" aria-label="已選條件"></div>
-        <div id="resultsList" class="results-list list-mode"></div>
+          <div id="activeChips" class="active-chips" aria-label="已選條件"></div>
+        </section>
+
+        <div class="table-hint">條列式清單：每列顯示價格、漲跌、RS、成交量、營收與法人指標，適合大量比較。</div>
+        <div id="resultsList" class="stock-list" aria-live="polite"></div>
         <button id="loadMoreBtn" class="load-more" type="button" hidden>載入更多</button>
       </section>
 
-      <section id="viewWatch" class="view" aria-labelledby="watchTitle">
-        <div class="result-header compact-result-header">
-          <div>
-            <p class="eyebrow">自選股</p>
-            <h2 id="watchTitle">我的追蹤清單</h2>
-            <p>在結果列點選星號即可加入或移除。</p>
+      <section id="viewWatch" class="view" aria-labelledby="watchHeading">
+        <section class="result-control">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Watchlist</p>
+              <h2 id="watchHeading">自選股</h2>
+              <p>在結果列點選星號即可加入或移除。</p>
+            </div>
           </div>
-        </div>
-        <div id="watchList" class="results-list list-mode"></div>
+        </section>
+        <div id="watchList" class="stock-list"></div>
       </section>
 
-      <section id="viewSettings" class="view" aria-labelledby="settingsTitle">
-        <div class="settings-card">
-          <p class="eyebrow">設定</p>
-          <h2 id="settingsTitle">資料與更新</h2>
-          <div class="setting-row"><span>目前版本</span><strong>V1_3</strong></div>
-          <div class="setting-row"><span>主要更新時間</span><strong>週一至週五 17:17</strong></div>
-          <div class="setting-row"><span>補跑時間</span><strong>週一至週五 17:47</strong></div>
-          <p class="hint">本 App 使用 GitHub Actions 在收盤後抓取免費公開資料，並在手機端讀取整理後的 JSON。技術面需要累積歷史價格，月營收與財報條件會在公開資料累積後更完整。</p>
-          <button id="manualRefreshBtn" class="primary-action compact" type="button">重新讀取最新 JSON</button>
-        </div>
+      <section id="viewSettings" class="view" aria-labelledby="settingsHeading">
+        <section class="settings-panel">
+          <p class="eyebrow">Settings</p>
+          <h2 id="settingsHeading">資料與更新</h2>
+          <div class="info-list">
+            <div><span>目前版本</span><strong>V1_4</strong></div>
+            <div><span>資料更新時間</span><strong id="settingsDataTime">讀取中</strong></div>
+            <div><span>自動更新檢查</span><strong>啟用，每 15 分鐘</strong></div>
+            <div><span>每日排程</span><strong>17:17，17:47 補跑</strong></div>
+          </div>
+          <div class="settings-actions">
+            <button id="manualRefreshBtn" class="primary-btn secondary" type="button">重新讀取資料</button>
+            <button id="manualUpdateBtn" class="primary-btn secondary" type="button">檢查程式更新</button>
+          </div>
+          <p class="note">資料由 GitHub Actions 在離峰時段抓取並整理成 JSON；手機端只負責檢視與篩選，避免每位使用者都直接打交易所 API。</p>
+        </section>
 
-        <div class="settings-card">
-          <p class="eyebrow">資料支援狀態</p>
-          <h2>篩選條件說明</h2>
+        <section class="settings-panel">
+          <p class="eyebrow">Support</p>
+          <h2>條件支援狀態</h2>
           <ul class="support-list">
-            <li><strong>技術面：</strong>每日收盤價累積後計算 RS、均線、22 日高點與扣抵值。</li>
-            <li><strong>基本面：</strong>已接月營收公開資料；連 2 月條件需至少累積 2 個月份。</li>
-            <li><strong>籌碼面：</strong>已支援 TWSE 三大法人資料；上櫃法人資料若來源失敗會自動跳過，不影響其他條件。</li>
-            <li><strong>ETF：</strong>ETF 無公司營收 / 財報，基本面條件通常不會符合。</li>
+            <li><strong>技術面：</strong>使用累積收盤價計算 RS、均線、22 日高點、扣抵值。</li>
+            <li><strong>基本面：</strong>使用公開月營收與財報資料；ETF 通常不適用基本面條件。</li>
+            <li><strong>籌碼面：</strong>使用三大法人與累積量價資料；部分免費來源不穩時會保留舊資料。</li>
+            <li><strong>買賣家數差：</strong>免費穩定來源不足，仍不納入篩選。</li>
           </ul>
-        </div>
+        </section>
       </section>
     </main>
 
+    <div id="filterActionBar" class="filter-action-bar">
+      <button id="runFilterBtn" class="primary-btn" type="button">
+        <span>套用篩選</span>
+        <strong id="previewCountText">查看結果</strong>
+      </button>
+    </div>
+
     <nav class="bottom-nav" aria-label="主選單">
-      <button class="nav-item active" data-view="filter" type="button"><span>🔍</span><b>篩選</b></button>
-      <button class="nav-item" data-view="results" type="button"><span>📋</span><b>結果</b></button>
-      <button class="nav-item" data-view="watch" type="button"><span>⭐</span><b>自選股</b></button>
-      <button class="nav-item" data-view="settings" type="button"><span>⚙️</span><b>設定</b></button>
+      <button class="nav-item active" data-view="filter" type="button"><span>篩選</span><b>Scanner</b></button>
+      <button class="nav-item" data-view="results" type="button"><span>結果</span><b>List</b></button>
+      <button class="nav-item" data-view="watch" type="button"><span>自選</span><b>Watch</b></button>
+      <button class="nav-item" data-view="settings" type="button"><span>設定</span><b>Settings</b></button>
     </nav>
+
+    <div id="updateBanner" class="update-banner" hidden>
+      <div>
+        <strong id="updateTitle">有新版本可用</strong>
+        <p id="updateMessage">重新整理即可更新。</p>
+      </div>
+      <button id="reloadAppBtn" type="button">更新</button>
+    </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </div>

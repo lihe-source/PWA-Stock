@@ -1,75 +1,57 @@
-# 台股雷達 Stock Radar V1_3
+# StockRadar_V1_4 台股雷達
 
-手機優先的台股 / ETF 篩選 PWA，部署在 GitHub Pages，使用 GitHub Actions 在收盤後整理免費公開資料。
+台股雷達是部署在 GitHub Pages 的 PWA，使用 GitHub Actions 在收盤後離峰時段整理免費公開資料，前端只讀取已整理好的 JSON，降低手機端與交易所資料源的負擔。
 
-## V1_3 更新重點
+## V1_4 更新重點
 
-1. 重新設計 UI，提高淺色與深色模式可讀性。
-2. 結果頁改成條列式比較清單，方便比較價格、漲跌、成交量、營收 YoY、外資、投信等欄位。
-3. 基本面篩選已可勾選：月營收創高或同期高、YoY 連 2 月、MoM 連 2 月、毛利率 / 營益率改善、公司沒有虧損。
-4. 籌碼面篩選已可勾選：籌碼集中度增加、外資買超、投信買超、大戶持股比例增加、法人持股創一季新高。
-5. `近期買賣家數差 < 0` 仍保留但停用，因免費且穩定的分點買賣家數資料來源不適合批次抓全市場。
-6. 新增 `history-revenue.json`、`history-financials.json`、`history-chip.json`，讓基本面與籌碼面可逐步累積。
+- 修正篩選頁面無法滑到最下方按按鈕的問題：改成固定在底部導覽上方的「套用篩選」按鈕，且主內容區保留足夠底部間距。
+- UI 全面重製：由大卡片式改為資料密度較高、適合大量股票比較的清單式 UI。
+- 結果頁改為條列式比較：每列顯示價格、漲跌、RS、成交量、成交額、營收 YoY、外資、投信。
+- 頁面最上方顯示資料更新時間，格式為 `yyyy/mm/dd hh:mm`。
+- 新增自動檢查程式更新：開啟 App、回到前景、每 15 分鐘自動檢查 `version.json` 與 Service Worker 更新。
+- 保留上市股票、上櫃股票、上市 ETF、上櫃 ETF 篩選。
+- 檔案維持扁平化，方便手機上傳 GitHub。
 
-## 檔案結構
+## 部署方式
 
-根目錄保持扁平，方便手機上傳 GitHub。唯一必要子資料夾是 GitHub Actions 規定的 `.github/workflows/`。
-
-```text
-StockRadar_V1_3/
-├── index.html
-├── styles.css
-├── app.js
-├── service-worker.js
-├── manifest.json
-├── icon.svg
-├── version.json
-├── update-config.js
-├── fetch-stock.mjs
-├── package.json
-├── screening.json
-├── latest.json
-├── history-prices.json
-├── history-revenue.json
-├── history-financials.json
-├── history-chip.json
-├── meta.json
-├── github-workflow-fetch-stock.yml
-└── .github/workflows/fetch-stock.yml
-```
-
-## GitHub Pages 部署
-
-1. 將 ZIP 解壓縮後，把 `StockRadar_V1_3` 內的所有檔案上傳到 GitHub repo 根目錄。
-2. 確認 repo 有 `.github/workflows/fetch-stock.yml`。
-3. 到 `Settings → Pages`，選 `Deploy from a branch`。
-4. Branch 選 `main`，資料夾選 `/root`。
-5. 到 `Settings → Actions → General → Workflow permissions`，設定 `Read and write permissions`。
-6. 到 `Actions → Fetch Taiwan Stock Radar Data → Run workflow` 手動執行一次。
+1. 將 `StockRadar_V1_4` 資料夾內所有檔案上傳到 GitHub repository 根目錄。
+2. 確認 `.github/workflows/fetch-stock.yml` 存在。
+3. 到 `Settings → Pages`，選擇 `Deploy from a branch`，branch 選 `main`，folder 選 `/root`。
+4. 到 `Settings → Actions → General → Workflow permissions`，選 `Read and write permissions`。
+5. 到 `Actions → Fetch Taiwan Stock Radar Data → Run workflow` 手動執行一次。
+6. 成功後會更新：
+   - `screening.json`
+   - `latest.json`
+   - `history-prices.json`
+   - `history-revenue.json`
+   - `history-financials.json`
+   - `history-chip.json`
+   - `meta.json`
 
 ## 排程
 
-Workflow 使用 UTC cron，對應台灣時間如下：
+GitHub Actions 使用 UTC 時間，對應台灣時間如下：
 
-- `17 9 * * 1-5` = 台灣時間週一至週五 17:17
-- `47 9 * * 1-5` = 台灣時間週一至週五 17:47 補跑
+- `17 9 * * 1-5` = 台灣時間 17:17
+- `47 9 * * 1-5` = 台灣時間 17:47 補跑
+
+目標是在晚上 6 點前完成當天股票狀態整理。
+
+## 檔案說明
+
+- `index.html`：PWA 主畫面。
+- `styles.css`：新 UI 樣式。
+- `app.js`：前端狀態管理、篩選、清單渲染、自動更新檢查。
+- `service-worker.js`：PWA 快取與新版切換。
+- `fetch-stock.mjs`：GitHub Actions 抓取並整理資料。
+- `version.json`：App 版本檢查檔。
+- `update-config.js`：前端自動檢查更新設定。
+- `.github/workflows/fetch-stock.yml`：GitHub Actions 排程。
+- `github-workflow-fetch-stock.yml`：手機操作備份檔，不會被 GitHub 自動執行。
 
 ## 注意事項
 
-- 技術面條件需要累積歷史收盤價，首次部署後會逐日變完整。
-- 月營收連 2 月條件至少需要累積兩個月份資料。
-- 季財報條件需要公開資料來源成功回傳且欄位可解析。
-- ETF 沒有公司月營收與季財報，因此基本面條件通常不會符合。
-- 抓資料策略採用批次 endpoint，不逐檔股票請求，降低台股數千檔資料造成流量限制的風險。
-
-## 本地語法檢查
-
-```bash
-npm run check
-```
-
-## 手動抓資料
-
-```bash
-npm run fetch
-```
+- PWA 前端不直接大量請求交易所 API，避免數千檔股票造成流量壓力。
+- ETF 沒有公司營收與財報，因此基本面條件通常不會符合。
+- 「近期買賣家數差 < 0」需要穩定分點資料，免費全市場來源不足，暫不納入篩選。
+- 初次部署後若資料仍是空的，請先手動執行一次 GitHub Actions。

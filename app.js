@@ -1,17 +1,17 @@
-const APP_VERSION = "V1_3";
+const APP_VERSION = "V1_4";
 const DATA_URL = "./screening.json";
 const WATCH_KEY = "stock-radar-watchlist-v1";
 const THEME_KEY = "stock-radar-theme";
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 120;
 
 const FILTER_GROUPS = [
   {
     id: "technical",
     title: "技術面",
-    icon: "📊",
+    note: "價格、強度、均線與扣抵",
     filters: [
       { id: "rsAbove90", title: "RS 指標大於 90", subtitle: "近 20 日相對強度排名前 10%" },
-      { id: "nearHigh22", title: "距 22 日高點 ≤ 5%", subtitle: "收盤接近近月高點" },
+      { id: "nearHigh22", title: "距 22 日高點 ≤ 5%", subtitle: "收盤價接近近月高點" },
       { id: "maShortBull", title: "短期均線多頭排列", subtitle: "MA5 > MA10 > MA20" },
       { id: "maMidBull", title: "中長期均線多頭排列", subtitle: "MA20 > MA60 > MA120" },
       { id: "aboveDeduction", title: "站上扣抵值", subtitle: "收盤 > 20 / 60 日前股價" }
@@ -20,9 +20,9 @@ const FILTER_GROUPS = [
   {
     id: "fundamental",
     title: "基本面",
-    icon: "📈",
+    note: "月營收、財報與獲利狀態",
     filters: [
-      { id: "revenueHigh", title: "營收創高或同期高", subtitle: "月營收創已收錄高點或 YoY > 0" },
+      { id: "revenueHigh", title: "營收創高或同期高", subtitle: "月營收創已收錄高點或年增為正" },
       { id: "revenueYoY2M", title: "年增率連 2 月 > 20%", subtitle: "近 2 個月營收 YoY" },
       { id: "revenueMoM2M", title: "月增率連 2 月 > 20%", subtitle: "近 2 個月營收 MoM" },
       { id: "marginGrowth", title: "毛利率 / 營益率改善", subtitle: "季財報較可比資料提升" },
@@ -32,12 +32,12 @@ const FILTER_GROUPS = [
   {
     id: "chip",
     title: "籌碼面",
-    icon: "🎯",
+    note: "法人、集中度與量能結構",
     filters: [
       { id: "majorHolderIncrease", title: "籌碼集中度增加", subtitle: "以量價與歷史成交量估算" },
-      { id: "brokerDiffNegative", title: "近期買賣家數差 < 0", subtitle: "需分點資料，暫不納入篩選", disabled: true },
-      { id: "foreignBuy", title: "外資買超", subtitle: "TWSE 三大法人資料可用時判斷" },
-      { id: "trustBuy", title: "投信買超", subtitle: "TWSE 三大法人資料可用時判斷" },
+      { id: "brokerDiffNegative", title: "近期買賣家數差 < 0", subtitle: "免費來源不穩，暫不納入篩選", disabled: true },
+      { id: "foreignBuy", title: "外資買超", subtitle: "三大法人資料可用時判斷" },
+      { id: "trustBuy", title: "投信買超", subtitle: "三大法人資料可用時判斷" },
       { id: "largeHolderRatioUp", title: "大戶持股比例增加", subtitle: "以量能趨勢替代估算" },
       { id: "institutionalQuarterHigh", title: "法人持股創一季新高", subtitle: "近 13 筆法人淨買超高點" }
     ]
@@ -51,33 +51,45 @@ const state = {
   visibleCount: PAGE_SIZE,
   selected: new Set(),
   watch: new Set(),
-  activeView: "filter"
+  activeView: "filter",
+  serviceWorkerWaiting: null,
+  reloadingForUpdate: false
 };
 
 const els = {
-  dataStatus: document.querySelector("#dataStatus"),
+  app: document.querySelector("#app"),
+  dataUpdatedAt: document.querySelector("#dataUpdatedAt"),
+  appUpdatedAt: document.querySelector("#appUpdatedAt"),
+  settingsDataTime: document.querySelector("#settingsDataTime"),
   marketSummary: document.querySelector("#marketSummary"),
-  coverageText: document.querySelector("#coverageText"),
+  totalCountText: document.querySelector("#totalCountText"),
+  selectedCountText: document.querySelector("#selectedCountText"),
+  previewCountText: document.querySelector("#previewCountText"),
   filterGroups: document.querySelector("#filterGroups"),
   runFilterBtn: document.querySelector("#runFilterBtn"),
-  reloadDataBtn: document.querySelector("#reloadDataBtn"),
   manualRefreshBtn: document.querySelector("#manualRefreshBtn"),
+  manualUpdateBtn: document.querySelector("#manualUpdateBtn"),
+  checkUpdateBtn: document.querySelector("#checkUpdateBtn"),
   clearFilterBtn: document.querySelector("#clearFilterBtn"),
+  clearFilterInlineBtn: document.querySelector("#clearFilterInlineBtn"),
   modeSelect: document.querySelector("#modeSelect"),
   marketSelect: document.querySelector("#marketSelect"),
   typeSelect: document.querySelector("#typeSelect"),
   searchInput: document.querySelector("#searchInput"),
   sortSelect: document.querySelector("#sortSelect"),
-  resultTitle: document.querySelector("#resultTitle"),
+  resultHeading: document.querySelector("#resultHeading"),
   resultSubtitle: document.querySelector("#resultSubtitle"),
   activeChips: document.querySelector("#activeChips"),
   resultsList: document.querySelector("#resultsList"),
   loadMoreBtn: document.querySelector("#loadMoreBtn"),
   watchList: document.querySelector("#watchList"),
   themeToggle: document.querySelector("#themeToggle"),
-  versionBadge: document.querySelector("#versionBadge"),
   toast: document.querySelector("#toast"),
-  mainScroll: document.querySelector("#mainScroll")
+  mainScroll: document.querySelector("#mainScroll"),
+  updateBanner: document.querySelector("#updateBanner"),
+  updateTitle: document.querySelector("#updateTitle"),
+  updateMessage: document.querySelector("#updateMessage"),
+  reloadAppBtn: document.querySelector("#reloadAppBtn")
 };
 
 function escapeHtml(value) {
@@ -117,18 +129,21 @@ function formatPercent(value) {
   return `${Number(value) > 0 ? "+" : ""}${Number(value).toFixed(2)}%`;
 }
 
-function formatTime(value) {
+function formatDateTime(value) {
   if (!value) return "尚未更新";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "尚未更新";
-  return date.toLocaleString("zh-TW", {
+  const parts = new Intl.DateTimeFormat("zh-TW", {
     timeZone: "Asia/Taipei",
-    hour12: false,
+    year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
-    minute: "2-digit"
-  });
+    minute: "2-digit",
+    hour12: false
+  }).formatToParts(date);
+  const map = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${map.year}/${map.month}/${map.day} ${map.hour}:${map.minute}`;
 }
 
 function showToast(message) {
@@ -136,6 +151,16 @@ function showToast(message) {
   els.toast.classList.add("show");
   window.clearTimeout(showToast.timer);
   showToast.timer = window.setTimeout(() => els.toast.classList.remove("show"), 2600);
+}
+
+function showUpdateBanner(title, message) {
+  els.updateTitle.textContent = title;
+  els.updateMessage.textContent = message;
+  els.updateBanner.hidden = false;
+}
+
+function hideUpdateBanner() {
+  els.updateBanner.hidden = true;
 }
 
 function loadWatchlist() {
@@ -154,7 +179,7 @@ function saveWatchlist() {
 function applyTheme(theme) {
   const resolved = theme === "dark" ? "dark" : "light";
   document.documentElement.classList.toggle("dark", resolved === "dark");
-  els.themeToggle.textContent = resolved === "dark" ? "☀️" : "🌙";
+  els.themeToggle.textContent = resolved === "dark" ? "☀" : "◐";
   localStorage.setItem(THEME_KEY, resolved);
 }
 
@@ -178,18 +203,18 @@ function getFilterInfo(filterId) {
 
 function renderFilterGroups() {
   els.filterGroups.innerHTML = FILTER_GROUPS.map((group) => {
-    const enabledFilters = group.filters.filter((filter) => !filter.disabled);
-    const selectedCount = group.filters.filter((filter) => state.selected.has(filter.id)).length;
-    const totalCount = group.filters.length;
-    const options = group.filters.map((filter) => {
+    const enabled = group.filters.filter((filter) => !filter.disabled);
+    const selectedCount = enabled.filter((filter) => state.selected.has(filter.id)).length;
+    const allSelected = enabled.length > 0 && enabled.every((filter) => state.selected.has(filter.id));
+    const rows = group.filters.map((filter) => {
       const checked = state.selected.has(filter.id) ? "checked" : "";
       const disabled = filter.disabled ? "disabled" : "";
       const disabledClass = filter.disabled ? " disabled" : "";
       return `
-        <label class="filter-option${disabledClass}">
+        <label class="condition-item${disabledClass}">
           <input type="checkbox" data-filter-id="${escapeHtml(filter.id)}" ${checked} ${disabled} />
-          <span class="fake-box" aria-hidden="true"></span>
-          <span class="filter-copy">
+          <span class="check-ui" aria-hidden="true"></span>
+          <span class="condition-copy">
             <strong>${escapeHtml(filter.title)}</strong>
             <small>${escapeHtml(filter.subtitle)}</small>
           </span>
@@ -197,28 +222,30 @@ function renderFilterGroups() {
       `;
     }).join("");
 
-    const allSelected = enabledFilters.length > 0 && enabledFilters.every((filter) => state.selected.has(filter.id));
-
     return `
-      <article class="filter-card" data-group-id="${escapeHtml(group.id)}">
-        <div class="filter-card-header">
-          <div class="filter-title">
-            <span class="emoji">${group.icon}</span>
+      <article class="condition-group" data-group-id="${escapeHtml(group.id)}">
+        <div class="condition-head">
+          <div class="condition-title">
             <h3>${escapeHtml(group.title)}</h3>
+            <p>${escapeHtml(group.note)}</p>
           </div>
-          <div class="filter-card-actions">
-            <span class="filter-count">${selectedCount}/${totalCount}</span>
-            <button class="select-all-btn" type="button" data-group-toggle="${escapeHtml(group.id)}" ${enabledFilters.length === 0 ? "disabled" : ""}>${allSelected ? "取消" : "全選"}</button>
-          </div>
+          <div class="condition-count">${selectedCount}/${enabled.length}</div>
+          <button class="condition-toggle" type="button" data-group-toggle="${escapeHtml(group.id)}">${allSelected ? "取消" : "全選"}</button>
         </div>
-        <div class="filter-options">${options}</div>
+        <div class="condition-list">${rows}</div>
       </article>
     `;
   }).join("");
+  updateSelectedCounter();
 }
 
 function getSelectedFilters() {
   return [...state.selected];
+}
+
+function updateSelectedCounter() {
+  const selected = getSelectedFilters();
+  els.selectedCountText.textContent = String(selected.length);
 }
 
 function matchesSelectedFilters(item, selectedFilters, mode) {
@@ -254,6 +281,8 @@ function applyFilters() {
   state.visibleCount = PAGE_SIZE;
   renderResults();
   renderActiveChips();
+  updateSelectedCounter();
+  els.previewCountText.textContent = `符合 ${formatNumber(state.filtered.length)} 檔`;
 }
 
 function sortResults() {
@@ -275,11 +304,10 @@ function sortResults() {
 }
 
 function renderActiveChips() {
-  const selected = getSelectedFilters();
   const chips = [];
   if (els.marketSelect.value !== "ALL") chips.push(els.marketSelect.value === "TWSE" ? "上市" : "上櫃");
   if (els.typeSelect.value !== "ALL") chips.push(els.typeSelect.value === "STOCK" ? "股票" : "ETF");
-  selected.forEach((filterId) => chips.push(getFilterInfo(filterId)?.title || filterId));
+  getSelectedFilters().forEach((filterId) => chips.push(getFilterInfo(filterId)?.title || filterId));
   els.activeChips.innerHTML = chips.length
     ? chips.map((chip) => `<span class="chip">${escapeHtml(chip)}</span>`).join("")
     : `<span class="chip muted-chip">未選條件：顯示全部資料</span>`;
@@ -295,7 +323,7 @@ function renderResults() {
   const selected = getSelectedFilters();
   const visible = state.filtered.slice(0, state.visibleCount);
   const total = state.filtered.length;
-  els.resultTitle.textContent = `符合 ${formatNumber(total)} 檔`;
+  els.resultHeading.textContent = `符合 ${formatNumber(total)} 檔`;
   els.resultSubtitle.textContent = selected.length
     ? `已選 ${selected.length} 個條件｜${els.modeSelect.options[els.modeSelect.selectedIndex].textContent}`
     : "未選條件，依市場 / 商品 / 搜尋條件顯示。";
@@ -315,41 +343,47 @@ function renderStockRow(item, rank) {
   const watched = state.watch.has(id);
   const trendClass = getTrendClass(item.change);
   const matchedLabels = getMatchedLabels(item);
-  const matchedText = item._matchedCount ? `${item._matchedCount} 項` : `${item.score ?? 0} 分`;
+  const matchedText = item._matchedCount ? `${item._matchedCount}項` : `${item.score ?? 0}分`;
   const revenueYoY = item.fundamentalMetrics?.revenueYoY;
   const foreignNet = item.chipMetrics?.foreignNet;
   const trustNet = item.chipMetrics?.trustNet;
+  const closeText = formatPrice(item.close);
+  const changeText = item.change === null || item.change === undefined
+    ? "-"
+    : `${Number(item.change) > 0 ? "+" : ""}${formatPrice(item.change)}`;
+  const changePercentText = item.changePercent === null || item.changePercent === undefined ? "" : ` ${formatPercent(item.changePercent)}`;
 
   return `
     <article class="stock-row" data-stock-id="${escapeHtml(id)}">
       <div class="row-rank">${rank}</div>
-      <div class="row-content">
-        <div class="row-topline">
-          <div class="stock-identity">
-            <button class="watch-btn" type="button" data-watch-id="${escapeHtml(id)}" aria-label="${watched ? "移除" : "加入"}自選股">${watched ? "★" : "☆"}</button>
-            <div>
-              <h3>${escapeHtml(item.code)} ${escapeHtml(item.name)}</h3>
-              <p><span>${escapeHtml(item.marketName || item.market)}</span>｜<span>${escapeHtml(item.securityType)}</span>｜符合 ${escapeHtml(matchedText)}</p>
-            </div>
+      <div class="row-main">
+        <div class="row-line1">
+          <div class="identity">
+            <h3>${escapeHtml(item.code)} ${escapeHtml(item.name)}</h3>
+            <p>${escapeHtml(item.marketName || item.market)}｜${escapeHtml(item.securityType || "-")}｜符合 ${escapeHtml(matchedText)}</p>
           </div>
-          <div class="price-stack">
-            <strong>${formatPrice(item.close)}</strong>
-            <span class="${trendClass}">${item.change === null || item.change === undefined ? "-" : `${Number(item.change) > 0 ? "+" : ""}${formatPrice(item.change)}`} ${item.changePercent === null || item.changePercent === undefined ? "" : `(${formatPercent(item.changePercent)})`}</span>
+          <button class="watch-btn" type="button" data-watch-id="${escapeHtml(id)}" aria-label="${watched ? "移除" : "加入"}自選股">${watched ? "★" : "☆"}</button>
+        </div>
+
+        <div class="row-line2">
+          <div class="price-box">
+            <strong>${closeText}</strong>
+            <span class="${trendClass}">${changeText}${changePercentText}</span>
           </div>
         </div>
 
-        <div class="compare-line" aria-label="比較指標">
-          <span><b>RS</b>${item.indicators?.rs ?? "-"}</span>
-          <span><b>量</b>${formatCompact(item.volume)}</span>
-          <span><b>額</b>${formatCompact(item.amount)}</span>
-          <span><b>營收YoY</b>${revenueYoY === null || revenueYoY === undefined ? "-" : formatPercent(revenueYoY)}</span>
-          <span><b>外資</b>${foreignNet === null || foreignNet === undefined ? "-" : formatCompact(foreignNet)}</span>
-          <span><b>投信</b>${trustNet === null || trustNet === undefined ? "-" : formatCompact(trustNet)}</span>
+        <div class="metric-grid" aria-label="比較指標">
+          <div class="metric"><span>RS</span><strong>${item.indicators?.rs ?? "-"}</strong></div>
+          <div class="metric"><span>成交量</span><strong>${formatCompact(item.volume)}</strong></div>
+          <div class="metric"><span>成交額</span><strong>${formatCompact(item.amount)}</strong></div>
+          <div class="metric"><span>營收 YoY</span><strong>${revenueYoY === null || revenueYoY === undefined ? "-" : formatPercent(revenueYoY)}</strong></div>
+          <div class="metric"><span>外資</span><strong>${foreignNet === null || foreignNet === undefined ? "-" : formatCompact(foreignNet)}</strong></div>
+          <div class="metric"><span>投信</span><strong>${trustNet === null || trustNet === undefined ? "-" : formatCompact(trustNet)}</strong></div>
         </div>
 
-        <ul class="matched-list">
-          ${matchedLabels.length ? matchedLabels.slice(0, 8).map((label) => `<li>${escapeHtml(label)}</li>`).join("") : `<li>目前沒有符合已支援條件</li>`}
-        </ul>
+        <div class="match-line">
+          ${matchedLabels.length ? matchedLabels.slice(0, 6).map((label) => `<span class="match-pill">${escapeHtml(label)}</span>`).join("") : `<span class="match-pill">尚無符合條件</span>`}
+        </div>
       </div>
     </article>
   `;
@@ -366,7 +400,7 @@ function getMatchedLabels(item) {
 function renderWatchlist() {
   const watchedItems = state.items.filter((item) => state.watch.has(`${item.market}:${item.code}`));
   if (!watchedItems.length) {
-    els.watchList.innerHTML = `<div class="empty-state">尚未加入自選股。</div>`;
+    els.watchList.innerHTML = `<div class="empty-state">尚未加入自選股。請到結果清單點選星號。</div>`;
     return;
   }
   els.watchList.innerHTML = watchedItems.map((item, index) => renderStockRow({ ...item, _matchedCount: item.score ?? 0 }, index + 1)).join("");
@@ -374,6 +408,7 @@ function renderWatchlist() {
 
 function setView(view) {
   state.activeView = view;
+  els.app.dataset.view = view;
   document.querySelectorAll(".view").forEach((el) => el.classList.remove("active"));
   document.querySelector(`#view${view[0].toUpperCase()}${view.slice(1)}`)?.classList.add("active");
   document.querySelectorAll(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.view === view));
@@ -381,8 +416,18 @@ function setView(view) {
   if (view === "watch") renderWatchlist();
 }
 
+function resetFilters() {
+  state.selected.clear();
+  els.searchInput.value = "";
+  els.marketSelect.value = "ALL";
+  els.typeSelect.value = "ALL";
+  els.modeSelect.value = "AND";
+  renderFilterGroups();
+  applyFilters();
+}
+
 async function loadData() {
-  els.dataStatus.textContent = "資料讀取中...";
+  els.dataUpdatedAt.textContent = "資料更新：讀取中";
   try {
     const response = await fetch(`${DATA_URL}?t=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -390,22 +435,24 @@ async function loadData() {
     state.raw = data;
     state.items = Array.isArray(data.items) ? data.items : [];
 
-    const updated = formatTime(data.updatedAt);
-    const dataDate = data.dataDate || "尚未產生";
-    els.dataStatus.textContent = `資料 ${dataDate}｜更新 ${updated}`;
+    const updated = formatDateTime(data.updatedAt);
+    els.dataUpdatedAt.textContent = `資料更新：${updated}`;
+    els.settingsDataTime.textContent = updated;
+    els.appUpdatedAt.textContent = `版本 ${APP_VERSION}｜${data.dataDate ? `資料日 ${data.dataDate}` : "等待 Actions"}`;
 
     const counts = data.counts || {};
-    els.marketSummary.textContent = `共 ${formatNumber(data.totalCount || state.items.length)} 檔`;
-    els.coverageText.textContent = `上市 ${formatNumber(counts.TWSE || 0)}｜上櫃 ${formatNumber(counts.TPEX || 0)}｜股票 ${formatNumber(counts.STOCK || 0)}｜ETF ${formatNumber(counts.ETF || 0)}`;
+    els.marketSummary.textContent = `上市 ${formatNumber(counts.TWSE || 0)}｜上櫃 ${formatNumber(counts.TPEX || 0)}`;
+    els.totalCountText.textContent = formatNumber(data.totalCount || state.items.length);
 
     applyFilters();
     renderWatchlist();
 
     if (!state.items.length) showToast(data.message || "尚無資料，請先執行 GitHub Actions。");
-    else showToast("股票資料已更新。");
+    else showToast("股票資料已讀取。");
   } catch (error) {
     console.error(error);
-    els.dataStatus.textContent = "資料讀取失敗";
+    els.dataUpdatedAt.textContent = "資料更新：讀取失敗";
+    els.settingsDataTime.textContent = "讀取失敗";
     els.resultsList.innerHTML = `<div class="empty-state">讀取 screening.json 失敗，請確認檔案已上傳或 Actions 已成功執行。</div>`;
     showToast("資料讀取失敗，請稍後再試。GitHub Pages 可能仍在部署。");
   }
@@ -442,20 +489,14 @@ function bindEvents() {
     setView("results");
   });
 
-  els.clearFilterBtn.addEventListener("click", () => {
-    state.selected.clear();
-    els.searchInput.value = "";
-    els.marketSelect.value = "ALL";
-    els.typeSelect.value = "ALL";
-    renderFilterGroups();
-    applyFilters();
-  });
+  els.clearFilterBtn.addEventListener("click", resetFilters);
+  els.clearFilterInlineBtn.addEventListener("click", resetFilters);
 
   [els.modeSelect, els.marketSelect, els.typeSelect, els.sortSelect].forEach((el) => el.addEventListener("change", applyFilters));
 
   els.searchInput.addEventListener("input", () => {
     window.clearTimeout(els.searchInput.timer);
-    els.searchInput.timer = window.setTimeout(applyFilters, 160);
+    els.searchInput.timer = window.setTimeout(applyFilters, 140);
   });
 
   els.loadMoreBtn.addEventListener("click", () => {
@@ -480,22 +521,39 @@ function bindEvents() {
   });
 
   document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
-  els.reloadDataBtn.addEventListener("click", loadData);
   els.manualRefreshBtn.addEventListener("click", loadData);
   els.themeToggle.addEventListener("click", () => applyTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"));
-  els.versionBadge.addEventListener("click", checkForUpdate);
+  els.checkUpdateBtn.addEventListener("click", () => checkForUpdate({ silent: false }));
+  els.manualUpdateBtn.addEventListener("click", () => checkForUpdate({ silent: false }));
+  els.reloadAppBtn.addEventListener("click", applyAppUpdate);
 }
 
-async function checkForUpdate() {
+async function checkForUpdate(options = {}) {
+  const silent = options.silent ?? true;
   try {
     const config = window.STOCK_RADAR_UPDATE_CONFIG || {};
     const response = await fetch(`${config.versionUrl || "./version.json"}?t=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
-    if (data.version && data.version !== APP_VERSION) showToast(`發現新版本 ${data.version}，重新整理後可更新。`);
-    else showToast("目前已是最新版本。");
-  } catch {
-    showToast("無法檢查版本，請稍後再試。");
+    if (data.version && data.version !== APP_VERSION) {
+      showUpdateBanner(`發現新版本 ${data.version}`, "點選更新會重新整理並取得最新程式。");
+      return true;
+    }
+    if (!silent) showToast("目前已是最新版本。");
+    return false;
+  } catch (error) {
+    console.warn("Update check failed", error);
+    if (!silent) showToast("無法檢查版本，請稍後再試。");
+    return false;
   }
+}
+
+function applyAppUpdate() {
+  if (state.serviceWorkerWaiting) {
+    state.serviceWorkerWaiting.postMessage({ type: "SKIP_WAITING" });
+    return;
+  }
+  window.location.reload();
 }
 
 async function registerServiceWorker() {
@@ -503,6 +561,28 @@ async function registerServiceWorker() {
   try {
     const registration = await navigator.serviceWorker.register("./service-worker.js");
     registration.update?.();
+
+    if (registration.waiting) {
+      state.serviceWorkerWaiting = registration.waiting;
+      showUpdateBanner("新版已下載", "點選更新即可切換到新版程式。");
+    }
+
+    registration.addEventListener("updatefound", () => {
+      const worker = registration.installing;
+      if (!worker) return;
+      worker.addEventListener("statechange", () => {
+        if (worker.state === "installed" && navigator.serviceWorker.controller) {
+          state.serviceWorkerWaiting = worker;
+          showUpdateBanner("新版已準備好", "點選更新即可套用新版。");
+        }
+      });
+    });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (state.reloadingForUpdate) return;
+      state.reloadingForUpdate = true;
+      window.location.reload();
+    });
   } catch (error) {
     console.warn("Service worker registration failed", error);
   }
@@ -518,6 +598,7 @@ function preventDoubleTapZoom() {
 }
 
 function init() {
+  els.app.dataset.view = "filter";
   initTheme();
   preventDoubleTapZoom();
   loadWatchlist();
@@ -525,8 +606,17 @@ function init() {
   bindEvents();
   registerServiceWorker();
   loadData();
-  const minutes = window.STOCK_RADAR_UPDATE_CONFIG?.checkIntervalMinutes || 30;
-  window.setInterval(checkForUpdate, minutes * 60 * 1000);
+  checkForUpdate({ silent: true });
+
+  const minutes = window.STOCK_RADAR_UPDATE_CONFIG?.checkIntervalMinutes || 15;
+  window.setInterval(() => checkForUpdate({ silent: true }), minutes * 60 * 1000);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      checkForUpdate({ silent: true });
+      loadData();
+    }
+  });
 }
 
 init();

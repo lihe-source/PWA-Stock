@@ -1,5 +1,5 @@
 window.STOCK_RADAR_UPDATE_CONFIG = {
   versionUrl: "./version.json",
-  checkIntervalMinutes: 30,
-  githubPagesBaseUrl: ""
+  dataUrl: "./screening.json",
+  checkIntervalMinutes: 15
 };

@@ -1,5 +1,5 @@
 {
-  "version": "V1_3",
-  "releasedAt": "2026-05-23T00:00:00+08:00",
-  "notes": "Improve readable UI, list-style comparison results, and enabled fundamental/chip filters."
+  "version": "V1_4",
+  "releasedAt": "2026-05-23T14:50:00.000Z",
+  "notes": "重新設計大量股票清單 UI、修正篩選頁底部按鈕可達性、加入自動更新檢查與頁首資料更新時間。"
 }

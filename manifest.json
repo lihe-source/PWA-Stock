@@ -1,13 +1,13 @@
 {
   "name": "台股雷達 Stock Radar",
   "short_name": "台股雷達",
-  "description": "台股與 ETF 收盤後自動整理篩選 PWA",
+  "description": "台股股票與 ETF 免費資料篩選 PWA",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
   "icons": [
     {
       "src": "./icon.svg",

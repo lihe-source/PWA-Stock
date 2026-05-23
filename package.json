@@ -1,10 +1,9 @@
 {
   "name": "stock-radar-pwa",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "type": "module",
   "scripts": {
     "fetch": "node fetch-stock.mjs",
     "check": "node --check fetch-stock.mjs && node --check app.js && node --check service-worker.js"
-  },
-  "private": true
+  }
 }

@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 
-const APP_VERSION = "V1_3";
+const APP_VERSION = "V1_4";
 const TIMEZONE = "Asia/Taipei";
 const MAX_TRADING_DAYS = 150;
 const FETCH_TIMEOUT_MS = 20000;
@@ -67,7 +67,7 @@ async function fetchTextWithRetry(url) {
       const response = await fetch(url, {
         headers: {
           Accept: "application/json,text/plain,*/*",
-          "User-Agent": "StockRadarPWA/1.3 (+https://github.com/)"
+          "User-Agent": "StockRadarPWA/1.4 (+https://github.com/)"
         },
         signal: controller.signal
       });

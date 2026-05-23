@@ -1,4 +1,4 @@
-const CACHE_NAME = "stock-radar-v1-3";
+const CACHE_NAME = "stock-radar-v1-4";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -11,34 +11,62 @@ const SHELL_FILES = [
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_FILES)));
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_FILES))
+  );
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+    caches.keys().then((keys) => Promise.all(
+      keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+    ))
   );
   self.clients.claim();
 });
 
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener("fetch", (event) => {
-  const url = new URL(event.request.url);
-  const networkFirstFiles = [
+  const request = event.request;
+  if (request.method !== "GET") return;
+
+  const url = new URL(request.url);
+  const dynamicFiles = [
     "/screening.json",
     "/latest.json",
-    "/meta.json",
     "/history-prices.json",
     "/history-revenue.json",
     "/history-financials.json",
     "/history-chip.json",
+    "/meta.json",
     "/version.json"
   ];
 
-  if (networkFirstFiles.some((path) => url.pathname.endsWith(path))) {
-    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  if (dynamicFiles.some((file) => url.pathname.endsWith(file))) {
+    event.respondWith(
+      fetch(request, { cache: "no-store" })
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
     return;
   }
 
-  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      return cached || fetch(request).then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        return response;
+      });
+    })
+  );
 });
