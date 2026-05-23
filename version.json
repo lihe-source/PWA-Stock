@@ -1,5 +1,5 @@
 {
-  "version": "V1_2",
-  "releasedAt": "2026-05-23T00:00:00.000Z",
-  "name": "StockRadar"
+  "version": "V1_3",
+  "releasedAt": "2026-05-23T00:00:00+08:00",
+  "notes": "Improve readable UI, list-style comparison results, and enabled fundamental/chip filters."
 }

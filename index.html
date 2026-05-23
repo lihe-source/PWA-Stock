@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="台股雷達" />
-  <meta name="theme-color" content="#101426" />
+  <meta name="theme-color" content="#0f172a" />
   <title>台股雷達 Stock Radar</title>
   <link rel="manifest" href="./manifest.json" />
   <link rel="icon" href="./icon.svg" type="image/svg+xml" />
@@ -16,28 +16,28 @@
   <div id="app" class="app-shell">
     <header class="app-header" aria-label="App header">
       <div class="brand">
-        <div class="brand-icon" aria-hidden="true">〽️</div>
-        <div>
+        <div class="brand-icon" aria-hidden="true">📈</div>
+        <div class="brand-text">
           <h1>台股雷達</h1>
           <p id="dataStatus">資料讀取中...</p>
         </div>
       </div>
       <div class="header-actions">
-        <button id="versionBadge" class="version-badge" type="button" aria-label="檢查版本">V1_2</button>
-        <button id="themeToggle" class="icon-button" type="button" aria-label="切換主題">☀️</button>
+        <button id="versionBadge" class="version-badge" type="button" aria-label="檢查版本">V1_3</button>
+        <button id="themeToggle" class="icon-button" type="button" aria-label="切換主題">🌙</button>
       </div>
     </header>
 
     <main class="app-main" id="mainScroll">
       <section id="viewFilter" class="view active" aria-labelledby="filterTitle">
-        <div class="summary-card">
+        <section class="summary-card compact-summary" aria-label="資料總覽">
           <div>
             <p class="eyebrow">全市場資料</p>
             <h2 id="marketSummary">上市 / 上櫃 / ETF</h2>
             <p id="coverageText">等待資料更新</p>
           </div>
-          <button id="reloadDataBtn" type="button" class="ghost-button">重載資料</button>
-        </div>
+          <button id="reloadDataBtn" type="button" class="ghost-button">重載</button>
+        </section>
 
         <section class="filter-toolbar" aria-label="篩選模式">
           <label>
@@ -45,13 +45,13 @@
             <select id="modeSelect">
               <option value="AND">全部符合</option>
               <option value="OR">任一符合</option>
-              <option value="SCORE">依分數排序</option>
+              <option value="SCORE">依符合數排序</option>
             </select>
           </label>
           <label>
             <span>市場</span>
             <select id="marketSelect">
-              <option value="ALL">全部</option>
+              <option value="ALL">全部市場</option>
               <option value="TWSE">上市</option>
               <option value="TPEX">上櫃</option>
             </select>
@@ -70,22 +70,22 @@
 
         <button id="runFilterBtn" class="primary-action" type="button">
           <span aria-hidden="true">🔍</span>
-          開始篩選全市場個股 / ETF
+          開始篩選全市場股票 / ETF
         </button>
       </section>
 
       <section id="viewResults" class="view" aria-labelledby="resultTitle">
-        <div class="result-header">
+        <div class="result-header compact-result-header">
           <div>
             <p class="eyebrow">篩選結果</p>
             <h2 id="resultTitle">尚未篩選</h2>
             <p id="resultSubtitle">請先選擇條件</p>
           </div>
-          <button id="clearFilterBtn" type="button" class="ghost-button">清除條件</button>
+          <button id="clearFilterBtn" type="button" class="ghost-button">清除</button>
         </div>
 
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="搜尋代號或名稱，例如 2330、0050、台積電" autocomplete="off" />
+          <input id="searchInput" type="search" placeholder="搜尋代號 / 名稱，例如 2330、0050" autocomplete="off" />
           <select id="sortSelect" aria-label="排序">
             <option value="score">符合度</option>
             <option value="changePercent">漲跌幅</option>
@@ -97,38 +97,29 @@
         </div>
 
         <div id="activeChips" class="active-chips" aria-label="已選條件"></div>
-        <div id="resultsList" class="results-list"></div>
+        <div id="resultsList" class="results-list list-mode"></div>
         <button id="loadMoreBtn" class="load-more" type="button" hidden>載入更多</button>
       </section>
 
       <section id="viewWatch" class="view" aria-labelledby="watchTitle">
-        <div class="result-header">
+        <div class="result-header compact-result-header">
           <div>
             <p class="eyebrow">自選股</p>
             <h2 id="watchTitle">我的追蹤清單</h2>
-            <p>點選結果卡片右上角星號即可加入或移除。</p>
+            <p>在結果列點選星號即可加入或移除。</p>
           </div>
         </div>
-        <div id="watchList" class="results-list"></div>
+        <div id="watchList" class="results-list list-mode"></div>
       </section>
 
       <section id="viewSettings" class="view" aria-labelledby="settingsTitle">
         <div class="settings-card">
           <p class="eyebrow">設定</p>
           <h2 id="settingsTitle">資料與更新</h2>
-          <div class="setting-row">
-            <span>目前版本</span>
-            <strong>V1_2</strong>
-          </div>
-          <div class="setting-row">
-            <span>主要更新時間</span>
-            <strong>週一至週五 17:17</strong>
-          </div>
-          <div class="setting-row">
-            <span>補跑時間</span>
-            <strong>週一至週五 17:47</strong>
-          </div>
-          <p class="hint">本 App 使用 GitHub Actions 在收盤後抓取免費公開資料，並在手機端讀取整理後的 JSON。技術面指標需要累積歷史資料，首次部署後會逐日變完整。</p>
+          <div class="setting-row"><span>目前版本</span><strong>V1_3</strong></div>
+          <div class="setting-row"><span>主要更新時間</span><strong>週一至週五 17:17</strong></div>
+          <div class="setting-row"><span>補跑時間</span><strong>週一至週五 17:47</strong></div>
+          <p class="hint">本 App 使用 GitHub Actions 在收盤後抓取免費公開資料，並在手機端讀取整理後的 JSON。技術面需要累積歷史價格，月營收與財報條件會在公開資料累積後更完整。</p>
           <button id="manualRefreshBtn" class="primary-action compact" type="button">重新讀取最新 JSON</button>
         </div>
 
@@ -136,9 +127,10 @@
           <p class="eyebrow">資料支援狀態</p>
           <h2>篩選條件說明</h2>
           <ul class="support-list">
-            <li><strong>技術面：</strong>由每日收盤價累積計算，資料足夠後自動啟用。</li>
-            <li><strong>基本面：</strong>已保留欄位與 UI，初版不使用假資料，後續可接月營收與季財報。</li>
-            <li><strong>籌碼面：</strong>已保留欄位與 UI，外資 / 投信等可在後續版本接法人資料。</li>
+            <li><strong>技術面：</strong>每日收盤價累積後計算 RS、均線、22 日高點與扣抵值。</li>
+            <li><strong>基本面：</strong>已接月營收公開資料；連 2 月條件需至少累積 2 個月份。</li>
+            <li><strong>籌碼面：</strong>已支援 TWSE 三大法人資料；上櫃法人資料若來源失敗會自動跳過，不影響其他條件。</li>
+            <li><strong>ETF：</strong>ETF 無公司營收 / 財報，基本面條件通常不會符合。</li>
           </ul>
         </div>
       </section>
