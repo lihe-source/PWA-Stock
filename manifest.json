@@ -1,0 +1,19 @@
+{
+  "name": "台股雷達 Stock Radar",
+  "short_name": "台股雷達",
+  "description": "台股與 ETF 免費資料篩選 PWA，透過 GitHub Actions 每日收盤後整理資料。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#101426",
+  "theme_color": "#101426",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

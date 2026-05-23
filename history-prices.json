@@ -1,0 +1,8 @@
+{
+  "schema": "stock-radar-history-prices-v1",
+  "appVersion": "V1_2",
+  "updatedAt": null,
+  "timezone": "Asia/Taipei",
+  "maxTradingDays": 150,
+  "entries": {}
+}

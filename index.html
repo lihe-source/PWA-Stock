@@ -1,1 +1,160 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="台股雷達" />
+  <meta name="theme-color" content="#101426" />
+  <title>台股雷達 Stock Radar</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="app-header" aria-label="App header">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">〽️</div>
+        <div>
+          <h1>台股雷達</h1>
+          <p id="dataStatus">資料讀取中...</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="versionBadge" class="version-badge" type="button" aria-label="檢查版本">V1_2</button>
+        <button id="themeToggle" class="icon-button" type="button" aria-label="切換主題">☀️</button>
+      </div>
+    </header>
 
+    <main class="app-main" id="mainScroll">
+      <section id="viewFilter" class="view active" aria-labelledby="filterTitle">
+        <div class="summary-card">
+          <div>
+            <p class="eyebrow">全市場資料</p>
+            <h2 id="marketSummary">上市 / 上櫃 / ETF</h2>
+            <p id="coverageText">等待資料更新</p>
+          </div>
+          <button id="reloadDataBtn" type="button" class="ghost-button">重載資料</button>
+        </div>
+
+        <section class="filter-toolbar" aria-label="篩選模式">
+          <label>
+            <span>符合模式</span>
+            <select id="modeSelect">
+              <option value="AND">全部符合</option>
+              <option value="OR">任一符合</option>
+              <option value="SCORE">依分數排序</option>
+            </select>
+          </label>
+          <label>
+            <span>市場</span>
+            <select id="marketSelect">
+              <option value="ALL">全部</option>
+              <option value="TWSE">上市</option>
+              <option value="TPEX">上櫃</option>
+            </select>
+          </label>
+          <label>
+            <span>商品</span>
+            <select id="typeSelect">
+              <option value="ALL">股票 + ETF</option>
+              <option value="STOCK">股票</option>
+              <option value="ETF">ETF</option>
+            </select>
+          </label>
+        </section>
+
+        <div id="filterGroups" class="filter-groups"></div>
+
+        <button id="runFilterBtn" class="primary-action" type="button">
+          <span aria-hidden="true">🔍</span>
+          開始篩選全市場個股 / ETF
+        </button>
+      </section>
+
+      <section id="viewResults" class="view" aria-labelledby="resultTitle">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">篩選結果</p>
+            <h2 id="resultTitle">尚未篩選</h2>
+            <p id="resultSubtitle">請先選擇條件</p>
+          </div>
+          <button id="clearFilterBtn" type="button" class="ghost-button">清除條件</button>
+        </div>
+
+        <div class="search-row">
+          <input id="searchInput" type="search" placeholder="搜尋代號或名稱，例如 2330、0050、台積電" autocomplete="off" />
+          <select id="sortSelect" aria-label="排序">
+            <option value="score">符合度</option>
+            <option value="changePercent">漲跌幅</option>
+            <option value="volume">成交量</option>
+            <option value="amount">成交金額</option>
+            <option value="rs">RS</option>
+            <option value="code">代號</option>
+          </select>
+        </div>
+
+        <div id="activeChips" class="active-chips" aria-label="已選條件"></div>
+        <div id="resultsList" class="results-list"></div>
+        <button id="loadMoreBtn" class="load-more" type="button" hidden>載入更多</button>
+      </section>
+
+      <section id="viewWatch" class="view" aria-labelledby="watchTitle">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">自選股</p>
+            <h2 id="watchTitle">我的追蹤清單</h2>
+            <p>點選結果卡片右上角星號即可加入或移除。</p>
+          </div>
+        </div>
+        <div id="watchList" class="results-list"></div>
+      </section>
+
+      <section id="viewSettings" class="view" aria-labelledby="settingsTitle">
+        <div class="settings-card">
+          <p class="eyebrow">設定</p>
+          <h2 id="settingsTitle">資料與更新</h2>
+          <div class="setting-row">
+            <span>目前版本</span>
+            <strong>V1_2</strong>
+          </div>
+          <div class="setting-row">
+            <span>主要更新時間</span>
+            <strong>週一至週五 17:17</strong>
+          </div>
+          <div class="setting-row">
+            <span>補跑時間</span>
+            <strong>週一至週五 17:47</strong>
+          </div>
+          <p class="hint">本 App 使用 GitHub Actions 在收盤後抓取免費公開資料，並在手機端讀取整理後的 JSON。技術面指標需要累積歷史資料，首次部署後會逐日變完整。</p>
+          <button id="manualRefreshBtn" class="primary-action compact" type="button">重新讀取最新 JSON</button>
+        </div>
+
+        <div class="settings-card">
+          <p class="eyebrow">資料支援狀態</p>
+          <h2>篩選條件說明</h2>
+          <ul class="support-list">
+            <li><strong>技術面：</strong>由每日收盤價累積計算，資料足夠後自動啟用。</li>
+            <li><strong>基本面：</strong>已保留欄位與 UI，初版不使用假資料，後續可接月營收與季財報。</li>
+            <li><strong>籌碼面：</strong>已保留欄位與 UI，外資 / 投信等可在後續版本接法人資料。</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="主選單">
+      <button class="nav-item active" data-view="filter" type="button"><span>🔍</span><b>篩選</b></button>
+      <button class="nav-item" data-view="results" type="button"><span>📋</span><b>結果</b></button>
+      <button class="nav-item" data-view="watch" type="button"><span>⭐</span><b>自選股</b></button>
+      <button class="nav-item" data-view="settings" type="button"><span>⚙️</span><b>設定</b></button>
+    </nav>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="./update-config.js"></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

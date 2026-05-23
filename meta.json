@@ -1,0 +1,16 @@
+{
+  "schema": "stock-radar-meta-v1",
+  "appVersion": "V1_2",
+  "status": "empty",
+  "updatedAt": null,
+  "dataDate": null,
+  "timezone": "Asia/Taipei",
+  "source": [
+    "TWSE OpenAPI",
+    "TPEx OpenAPI"
+  ],
+  "schedule": {
+    "primary": "17:17 Asia/Taipei on weekdays",
+    "retry": "17:47 Asia/Taipei on weekdays"
+  }
+}

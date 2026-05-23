@@ -1,0 +1,11 @@
+{
+  "schema": "stock-radar-latest-v1",
+  "appVersion": "V1_2",
+  "status": "empty",
+  "message": "尚未執行 GitHub Actions。",
+  "updatedAt": null,
+  "dataDate": null,
+  "timezone": "Asia/Taipei",
+  "totalCount": 0,
+  "items": []
+}

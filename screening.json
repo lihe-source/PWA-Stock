@@ -1,0 +1,17 @@
+{
+  "schema": "stock-radar-screening-v1",
+  "appVersion": "V1_2",
+  "status": "empty",
+  "message": "尚未執行 GitHub Actions。請到 Actions 手動 Run workflow 一次，或等待每日 17:17 自動更新。",
+  "updatedAt": null,
+  "dataDate": null,
+  "timezone": "Asia/Taipei",
+  "totalCount": 0,
+  "counts": {
+    "TWSE": 0,
+    "TPEX": 0,
+    "STOCK": 0,
+    "ETF": 0
+  },
+  "items": []
+}
