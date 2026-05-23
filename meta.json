@@ -1,12 +1,57 @@
 {
   "schema": "stock-radar-meta-v1",
   "appVersion": "V1_3",
-  "status": "empty",
-  "updatedAt": null,
-  "dataDate": null,
+  "status": "ok",
+  "updatedAt": "2026-05-23T14:30:58.472Z",
+  "dataDate": "2026-05-23",
   "timezone": "Asia/Taipei",
+  "totalCount": 2294,
+  "counts": {
+    "TWSE": 1304,
+    "TPEX": 990,
+    "STOCK": 1961,
+    "ETF": 333
+  },
+  "sourceStatus": {
+    "daily": {
+      "TWSE": true,
+      "TPEX": true
+    },
+    "revenue": {
+      "TWSE": true,
+      "TPEX": true
+    },
+    "financial": {
+      "TWSE": true,
+      "TPEX": true
+    },
+    "chip": {
+      "TWSE": true,
+      "TPEX": false
+    }
+  },
+  "source": {
+    "TWSE_DAILY": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+    "TPEX_DAILY": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
+    "TWSE_REVENUE": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
+    "TPEX_REVENUE": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O",
+    "TWSE_FINANCIAL": "https://openapi.twse.com.tw/v1/opendata/t187ap15_L",
+    "TPEX_FINANCIAL": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap15_O",
+    "TWSE_CHIP": "https://www.twse.com.tw/rwd/zh/fund/T86?date=20260522&selectType=ALLBUT0999&response=json"
+  },
   "schedule": {
     "primary": "17:17 Asia/Taipei on weekdays",
-    "retry": "17:47 Asia/Taipei on weekdays"
+    "retry": "17:47 Asia/Taipei on weekdays",
+    "note": "The retry run helps finish daily data preparation before 18:00 when the platform is not delayed."
+  },
+  "limits": {
+    "strategy": "batch endpoints only; no per-symbol requests",
+    "maxTradingDaysKept": 150,
+    "historyFiles": [
+      "history-prices.json",
+      "history-revenue.json",
+      "history-financials.json",
+      "history-chip.json"
+    ]
   }
 }
