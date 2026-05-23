@@ -1,16 +1,29 @@
 {
   "schema": "stock-radar-meta-v1",
   "appVersion": "V1_2",
-  "status": "empty",
-  "updatedAt": null,
-  "dataDate": null,
+  "status": "ok",
+  "updatedAt": "2026-05-23T14:09:08.459Z",
+  "dataDate": "2026-05-23",
   "timezone": "Asia/Taipei",
-  "source": [
-    "TWSE OpenAPI",
-    "TPEx OpenAPI"
-  ],
+  "totalCount": 2294,
+  "counts": {
+    "TWSE": 1304,
+    "TPEX": 990,
+    "STOCK": 1961,
+    "ETF": 333
+  },
+  "source": {
+    "TWSE": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+    "TPEX": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
+  },
   "schedule": {
     "primary": "17:17 Asia/Taipei on weekdays",
-    "retry": "17:47 Asia/Taipei on weekdays"
+    "retry": "17:47 Asia/Taipei on weekdays",
+    "note": "The retry run helps finish daily data preparation before 18:00 when the platform is not delayed."
+  },
+  "limits": {
+    "strategy": "batch endpoints only; no per-symbol requests",
+    "maxTradingDaysKept": 150,
+    "historyFile": "history-prices.json"
   }
 }
