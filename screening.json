@@ -2,7 +2,7 @@
   "schema": "stock-radar-screening-v1",
   "appVersion": "V1_4",
   "status": "ok",
-  "updatedAt": "2026-05-27T12:31:03.121Z",
+  "updatedAt": "2026-05-27T12:44:52.774Z",
   "dataDate": "2026-05-27",
   "timezone": "Asia/Taipei",
   "totalCount": 2293,
@@ -54276,6 +54276,75 @@
         "trustNet": 0,
         "dealerNet": 0,
         "totalNet": -483168,
+        "volumeMA5": null,
+        "volumeMA20": null
+      },
+      "score": 1
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "2031",
+      "name": "新光鋼",
+      "open": 39.9,
+      "high": 40.15,
+      "low": 38.75,
+      "close": 38.85,
+      "change": -0.75,
+      "changePercent": -1.89,
+      "volume": 1846770,
+      "amount": 72185610,
+      "transactions": 920,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": false,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": false,
+        "trustBuy": true,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 63,
+        "return20": null,
+        "ma5": null,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 3
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 1701791,
+        "revenueYoY": -10.717755812977419,
+        "revenueMoM": -4.7308455811964185,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-27",
+        "foreignNet": -26936,
+        "trustNet": 415,
+        "dealerNet": -21908,
+        "totalNet": null,
         "volumeMA5": null,
         "volumeMA20": null
       },
@@ -129150,75 +129219,6 @@
         "trustNet": 0,
         "dealerNet": 0,
         "totalNet": -2000,
-        "volumeMA5": null,
-        "volumeMA20": null
-      },
-      "score": 0
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
-      "code": "2031",
-      "name": "新光鋼",
-      "open": 39.9,
-      "high": 40.15,
-      "low": 38.75,
-      "close": 38.85,
-      "change": -0.75,
-      "changePercent": -1.89,
-      "volume": 1846770,
-      "amount": 72185610,
-      "transactions": 920,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": false,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": false,
-        "trustBuy": false,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 63,
-        "return20": null,
-        "ma5": null,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 3
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 1701791,
-        "revenueYoY": -10.717755812977419,
-        "revenueMoM": -4.7308455811964185,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-27",
-        "foreignNet": -26936,
-        "trustNet": -21908,
-        "dealerNet": 0,
-        "totalNet": -46259,
         "volumeMA5": null,
         "volumeMA20": null
       },
