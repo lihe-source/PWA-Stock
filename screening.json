@@ -2,7 +2,7 @@
   "schema": "stock-radar-screening-v1",
   "appVersion": "V1_4",
   "status": "ok",
-  "updatedAt": "2026-05-29T12:26:56.084Z",
+  "updatedAt": "2026-05-29T12:36:28.612Z",
   "dataDate": "2026-05-29",
   "timezone": "Asia/Taipei",
   "totalCount": 2297,
@@ -3942,9 +3942,9 @@
         "majorHolderIncrease": false,
         "brokerDiffNegative": false,
         "foreignBuy": true,
-        "trustBuy": true,
+        "trustBuy": false,
         "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
+        "institutionalQuarterHigh": true
       },
       "indicators": {
         "rs": 99,
@@ -3970,9 +3970,9 @@
       "chipMetrics": {
         "chipDate": "2026-05-29",
         "foreignNet": 81000,
-        "trustNet": 7000,
+        "trustNet": 0,
         "dealerNet": 0,
-        "totalNet": null,
+        "totalNet": 75000,
         "volumeMA5": 225303,
         "volumeMA20": null
       },
@@ -6741,75 +6741,6 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
-      "code": "1718",
-      "name": "中纖",
-      "open": 6.32,
-      "high": 6.44,
-      "low": 6.31,
-      "close": 6.4,
-      "change": 0.09,
-      "changePercent": 1.43,
-      "volume": 3945042,
-      "amount": 25180923,
-      "transactions": 1353,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": true,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 60,
-        "return20": null,
-        "ma5": 6.4,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 4445457,
-        "revenueYoY": 4.2277901572189025,
-        "revenueMoM": 40.60044291702801,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": 788400,
-        "trustNet": 43000,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 3560506,
-        "volumeMA20": null
-      },
-      "score": 3
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
       "code": "1722",
       "name": "台肥",
       "open": 46.5,
@@ -7216,75 +7147,6 @@
         "dealerNet": 0,
         "totalNet": 64000,
         "volumeMA5": 76057,
-        "volumeMA20": null
-      },
-      "score": 3
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
-      "code": "1776",
-      "name": "展宇",
-      "open": 18.15,
-      "high": 18.6,
-      "low": 18.1,
-      "close": 18.15,
-      "change": 0,
-      "changePercent": 0,
-      "volume": 154413,
-      "amount": 2815865,
-      "transactions": 97,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": true,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 61,
-        "return20": null,
-        "ma5": 18.5,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 98792,
-        "revenueYoY": 9.00103713838074,
-        "revenueMoM": -23.109492232495874,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": 34000,
-        "trustNet": 2000,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 253343,
         "volumeMA20": null
       },
       "score": 3
@@ -12460,75 +12322,6 @@
         "dealerNet": 0,
         "totalNet": 22139,
         "volumeMA5": 123706,
-        "volumeMA20": null
-      },
-      "score": 3
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
-      "code": "4426",
-      "name": "利勤",
-      "open": 7.69,
-      "high": 7.95,
-      "low": 7.57,
-      "close": 7.72,
-      "change": 0.15,
-      "changePercent": 1.98,
-      "volume": 251190,
-      "amount": 1928977,
-      "transactions": 190,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": true,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 82,
-        "return20": null,
-        "ma5": 7.61,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 87944,
-        "revenueYoY": 26.831941620156044,
-        "revenueMoM": 3.1915892236928567,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": 31000,
-        "trustNet": 12000,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 220593,
         "volumeMA20": null
       },
       "score": 3
@@ -17919,75 +17712,6 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
-      "code": "8476",
-      "name": "台境*",
-      "open": 15.2,
-      "high": 15.55,
-      "low": 15.2,
-      "close": 15.35,
-      "change": 0.2,
-      "changePercent": 1.32,
-      "volume": 367515,
-      "amount": 5645521,
-      "transactions": 203,
-      "technical": {
-        "rsAbove90": true,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": false,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": true,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 98,
-        "return20": null,
-        "ma5": 15.53,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 96686,
-        "revenueYoY": -37.44435817805383,
-        "revenueMoM": -1.3166489752592472,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": 40487,
-        "trustNet": 3000,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 409649,
-        "volumeMA20": null
-      },
-      "score": 3
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
       "code": "8478",
       "name": "東哥遊艇",
       "open": 151.5,
@@ -22914,75 +22638,6 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
-      "code": "1236",
-      "name": "宏亞",
-      "open": 24.2,
-      "high": 24.4,
-      "low": 24.2,
-      "close": 24.3,
-      "change": -0.05,
-      "changePercent": -0.21,
-      "volume": 19685,
-      "amount": 478583,
-      "transactions": 54,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": false,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": true,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 54,
-        "return20": null,
-        "ma5": 24.17,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 122248,
-        "revenueYoY": -2.438090069671117,
-        "revenueMoM": 18.381655143028684,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": 6464,
-        "trustNet": 5000,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 25373,
-        "volumeMA20": null
-      },
-      "score": 2
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
       "code": "1304",
       "name": "台聚",
       "open": 12,
@@ -25950,6 +25605,75 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
+      "code": "1718",
+      "name": "中纖",
+      "open": 6.32,
+      "high": 6.44,
+      "low": 6.31,
+      "close": 6.4,
+      "change": 0.09,
+      "changePercent": 1.43,
+      "volume": 3945042,
+      "amount": 25180923,
+      "transactions": 1353,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": true,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 60,
+        "return20": null,
+        "ma5": 6.4,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 4445457,
+        "revenueYoY": 4.2277901572189025,
+        "revenueMoM": 40.60044291702801,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": 788400,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": 822852,
+        "volumeMA5": 3560506,
+        "volumeMA20": null
+      },
+      "score": 2
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
       "code": "1720",
       "name": "生達",
       "open": 61.2,
@@ -26356,6 +26080,75 @@
         "dealerNet": 0,
         "totalNet": -279849,
         "volumeMA5": 2461715,
+        "volumeMA20": null
+      },
+      "score": 2
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "1776",
+      "name": "展宇",
+      "open": 18.15,
+      "high": 18.6,
+      "low": 18.1,
+      "close": 18.15,
+      "change": 0,
+      "changePercent": 0,
+      "volume": 154413,
+      "amount": 2815865,
+      "transactions": 97,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": true,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 61,
+        "return20": null,
+        "ma5": 18.5,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 98792,
+        "revenueYoY": 9.00103713838074,
+        "revenueMoM": -23.109492232495874,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": 34000,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": 34000,
+        "volumeMA5": 253343,
         "volumeMA20": null
       },
       "score": 2
@@ -30149,7 +29942,7 @@
         "foreignNet": 5126,
         "trustNet": 0,
         "dealerNet": 0,
-        "totalNet": null,
+        "totalNet": 7126,
         "volumeMA5": 145820,
         "volumeMA20": null
       },
@@ -34368,75 +34161,6 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
-      "code": "2903",
-      "name": "遠百",
-      "open": 22,
-      "high": 22,
-      "low": 21.6,
-      "close": 21.8,
-      "change": -0.1,
-      "changePercent": -0.46,
-      "volume": 2646841,
-      "amount": 57584378,
-      "transactions": 1595,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": false,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 74,
-        "return20": null,
-        "ma5": 22.06,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 2532886,
-        "revenueYoY": 0.5401547586252887,
-        "revenueMoM": -12.486551068624273,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": -1072000,
-        "trustNet": 1757,
-        "dealerNet": -15000,
-        "totalNet": null,
-        "volumeMA5": 1905888,
-        "volumeMA20": null
-      },
-      "score": 2
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
       "code": "2904",
       "name": "匯僑",
       "open": 14.15,
@@ -38370,6 +38094,75 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
+      "code": "4426",
+      "name": "利勤",
+      "open": 7.69,
+      "high": 7.95,
+      "low": 7.57,
+      "close": 7.72,
+      "change": 0.15,
+      "changePercent": 1.98,
+      "volume": 251190,
+      "amount": 1928977,
+      "transactions": 190,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": true,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 82,
+        "return20": null,
+        "ma5": 7.61,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 87944,
+        "revenueYoY": 26.831941620156044,
+        "revenueMoM": 3.1915892236928567,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": 31000,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": 26000,
+        "volumeMA5": 220593,
+        "volumeMA20": null
+      },
+      "score": 2
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
       "code": "4438",
       "name": "廣越",
       "open": 59,
@@ -39673,75 +39466,6 @@
         "dealerNet": 0,
         "totalNet": 881,
         "volumeMA5": 47627,
-        "volumeMA20": null
-      },
-      "score": 2
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
-      "code": "4952",
-      "name": "凌通",
-      "open": 54.5,
-      "high": 55.5,
-      "low": 52.3,
-      "close": 53.3,
-      "change": -2.5,
-      "changePercent": -4.48,
-      "volume": 2044758,
-      "amount": 110650062,
-      "transactions": 2160,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": false,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 84,
-        "return20": null,
-        "ma5": 54.38,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 281211,
-        "revenueYoY": 10.240779652512074,
-        "revenueMoM": 5.990170286222571,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": -382000,
-        "trustNet": 5258,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 3071244,
         "volumeMA20": null
       },
       "score": 2
@@ -41329,75 +41053,6 @@
         "dealerNet": 0,
         "totalNet": 238892,
         "volumeMA5": 2243557,
-        "volumeMA20": null
-      },
-      "score": 2
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
-      "code": "6166",
-      "name": "凌華",
-      "open": 140.5,
-      "high": 145,
-      "low": 128.5,
-      "close": 129.5,
-      "change": -6.5,
-      "changePercent": -4.78,
-      "volume": 4569095,
-      "amount": 619022942,
-      "transactions": 4277,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": false,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": false,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": false,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 87,
-        "return20": null,
-        "ma5": 130.5,
-        "ma10": null,
-        "ma20": null,
-        "ma60": null,
-        "ma120": null,
-        "high22": null,
-        "historyDays": 5
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-04",
-        "revenue": 1510756,
-        "revenueYoY": 63.164454428616175,
-        "revenueMoM": 5.635748827400647,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-05-29",
-        "foreignNet": -451638,
-        "trustNet": 5989,
-        "dealerNet": 0,
-        "totalNet": null,
-        "volumeMA5": 4005129,
         "volumeMA20": null
       },
       "score": 2
@@ -46788,6 +46443,75 @@
       "market": "TWSE",
       "marketName": "上市",
       "securityType": "STOCK",
+      "code": "8476",
+      "name": "台境*",
+      "open": 15.2,
+      "high": 15.55,
+      "low": 15.2,
+      "close": 15.35,
+      "change": 0.2,
+      "changePercent": 1.32,
+      "volume": 367515,
+      "amount": 5645521,
+      "transactions": 203,
+      "technical": {
+        "rsAbove90": true,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": false,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": true,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 98,
+        "return20": null,
+        "ma5": 15.53,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 96686,
+        "revenueYoY": -37.44435817805383,
+        "revenueMoM": -1.3166489752592472,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": 40487,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": 42487,
+        "volumeMA5": 409649,
+        "volumeMA20": null
+      },
+      "score": 2
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
       "code": "8481",
       "name": "政伸",
       "open": 40.8,
@@ -50874,7 +50598,7 @@
         "foreignNet": 3000,
         "trustNet": 0,
         "dealerNet": 0,
-        "totalNet": null,
+        "totalNet": 4558,
         "volumeMA5": 30824,
         "volumeMA20": null
       },
@@ -55846,6 +55570,75 @@
         "dealerNet": 0,
         "totalNet": 4380,
         "volumeMA5": 175793,
+        "volumeMA20": null
+      },
+      "score": 1
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "1236",
+      "name": "宏亞",
+      "open": 24.2,
+      "high": 24.4,
+      "low": 24.2,
+      "close": 24.3,
+      "change": -0.05,
+      "changePercent": -0.21,
+      "volume": 19685,
+      "amount": 478583,
+      "transactions": 54,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": false,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": true,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 54,
+        "return20": null,
+        "ma5": 24.17,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 122248,
+        "revenueYoY": -2.438090069671117,
+        "revenueMoM": 18.381655143028684,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": 6464,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": 2464,
+        "volumeMA5": 25373,
         "volumeMA20": null
       },
       "score": 1
@@ -63986,7 +63779,7 @@
         "foreignNet": 30000,
         "trustNet": 0,
         "dealerNet": 0,
-        "totalNet": null,
+        "totalNet": 31000,
         "volumeMA5": 87386,
         "volumeMA20": null
       },
@@ -68611,6 +68404,75 @@
         "dealerNet": 0,
         "totalNet": -685000,
         "volumeMA5": 2885220,
+        "volumeMA20": null
+      },
+      "score": 1
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "2903",
+      "name": "遠百",
+      "open": 22,
+      "high": 22,
+      "low": 21.6,
+      "close": 21.8,
+      "change": -0.1,
+      "changePercent": -0.46,
+      "volume": 2646841,
+      "amount": 57584378,
+      "transactions": 1595,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": false,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 74,
+        "return20": null,
+        "ma5": 22.06,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 2532886,
+        "revenueYoY": 0.5401547586252887,
+        "revenueMoM": -12.486551068624273,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": -1072000,
+        "trustNet": -15000,
+        "dealerNet": 0,
+        "totalNet": -1073757,
+        "volumeMA5": 1905888,
         "volumeMA20": null
       },
       "score": 1
@@ -88419,6 +88281,75 @@
       "score": 1
     },
     {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "4952",
+      "name": "凌通",
+      "open": 54.5,
+      "high": 55.5,
+      "low": 52.3,
+      "close": 53.3,
+      "change": -2.5,
+      "changePercent": -4.48,
+      "volume": 2044758,
+      "amount": 110650062,
+      "transactions": 2160,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": false,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 84,
+        "return20": null,
+        "ma5": 54.38,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 281211,
+        "revenueYoY": 10.240779652512074,
+        "revenueMoM": 5.990170286222571,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": -382000,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": -378258,
+        "volumeMA5": 3071244,
+        "volumeMA20": null
+      },
+      "score": 1
+    },
+    {
       "market": "TPEX",
       "marketName": "上櫃",
       "securityType": "STOCK",
@@ -97246,6 +97177,75 @@
         "dealerNet": 0,
         "totalNet": -51000,
         "volumeMA5": 522396,
+        "volumeMA20": null
+      },
+      "score": 1
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "6166",
+      "name": "凌華",
+      "open": 140.5,
+      "high": 145,
+      "low": 128.5,
+      "close": 129.5,
+      "change": -6.5,
+      "changePercent": -4.78,
+      "volume": 4569095,
+      "amount": 619022942,
+      "transactions": 4277,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": false,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": false,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": false,
+        "trustBuy": false,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": false
+      },
+      "indicators": {
+        "rs": 87,
+        "return20": null,
+        "ma5": 130.5,
+        "ma10": null,
+        "ma20": null,
+        "ma60": null,
+        "ma120": null,
+        "high22": null,
+        "historyDays": 5
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-04",
+        "revenue": 1510756,
+        "revenueYoY": 63.164454428616175,
+        "revenueMoM": 5.635748827400647,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-05-29",
+        "foreignNet": -451638,
+        "trustNet": 0,
+        "dealerNet": 0,
+        "totalNet": -453104,
+        "volumeMA5": 4005129,
         "volumeMA20": null
       },
       "score": 1
@@ -117800,7 +117800,7 @@
         "foreignNet": -33000,
         "trustNet": 0,
         "dealerNet": 0,
-        "totalNet": null,
+        "totalNet": 445514,
         "volumeMA5": 910835,
         "volumeMA20": null
       },
