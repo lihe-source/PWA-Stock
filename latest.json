@@ -2,7 +2,7 @@
   "schema": "stock-radar-latest-v1",
   "appVersion": "V1_4",
   "status": "ok",
-  "updatedAt": "2026-06-03T14:05:19.080Z",
+  "updatedAt": "2026-06-03T14:17:18.657Z",
   "dataDate": "2026-06-03",
   "timezone": "Asia/Taipei",
   "totalCount": 2299,
@@ -26,7 +26,7 @@
       "TPEX": true
     },
     "chip": {
-      "TWSE": true,
+      "TWSE": false,
       "TPEX": false
     }
   },
@@ -37,7 +37,7 @@
     "TPEX_REVENUE": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O",
     "TWSE_FINANCIAL": "https://openapi.twse.com.tw/v1/opendata/t187ap15_L",
     "TPEX_FINANCIAL": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap15_O",
-    "TWSE_CHIP": "https://www.twse.com.tw/rwd/zh/fund/T86?date=20260603&selectType=ALLBUT0999&response=json"
+    "TWSE_CHIP": null
   },
   "items": [
     {
