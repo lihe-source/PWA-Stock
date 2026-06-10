@@ -2,14 +2,14 @@
   "schema": "stock-radar-meta-v1",
   "appVersion": "V1_4",
   "status": "ok",
-  "updatedAt": "2026-06-09T12:15:02.228Z",
-  "dataDate": "2026-06-09",
+  "updatedAt": "2026-06-10T12:35:45.723Z",
+  "dataDate": "2026-06-10",
   "timezone": "Asia/Taipei",
-  "totalCount": 2289,
+  "totalCount": 2293,
   "counts": {
-    "TWSE": 1304,
-    "TPEX": 985,
-    "STOCK": 1952,
+    "TWSE": 1306,
+    "TPEX": 987,
+    "STOCK": 1956,
     "ETF": 337
   },
   "sourceStatus": {
@@ -37,7 +37,7 @@
     "TPEX_REVENUE": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O",
     "TWSE_FINANCIAL": "https://openapi.twse.com.tw/v1/opendata/t187ap15_L",
     "TPEX_FINANCIAL": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap15_O",
-    "TWSE_CHIP": "https://www.twse.com.tw/rwd/zh/fund/T86?date=20260609&selectType=ALLBUT0999&response=json"
+    "TWSE_CHIP": "https://www.twse.com.tw/rwd/zh/fund/T86?date=20260610&selectType=ALLBUT0999&response=json"
   },
   "schedule": {
     "primary": "17:17 Asia/Taipei on weekdays",
