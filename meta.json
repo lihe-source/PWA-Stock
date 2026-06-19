@@ -2,15 +2,15 @@
   "schema": "stock-radar-meta-v1",
   "appVersion": "V1_4",
   "status": "ok",
-  "updatedAt": "2026-06-18T12:41:29.584Z",
-  "dataDate": "2026-06-18",
+  "updatedAt": "2026-06-19T12:53:41.136Z",
+  "dataDate": "2026-06-19",
   "timezone": "Asia/Taipei",
-  "totalCount": 2297,
+  "totalCount": 2295,
   "counts": {
-    "TWSE": 1307,
+    "TWSE": 1305,
     "TPEX": 990,
     "STOCK": 1955,
-    "ETF": 342
+    "ETF": 340
   },
   "sourceStatus": {
     "daily": {
