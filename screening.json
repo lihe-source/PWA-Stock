@@ -2,7 +2,7 @@
   "schema": "stock-radar-screening-v1",
   "appVersion": "V1_4",
   "status": "ok",
-  "updatedAt": "2026-06-25T11:49:15.600Z",
+  "updatedAt": "2026-06-25T12:06:45.041Z",
   "dataDate": "2026-06-25",
   "timezone": "Asia/Taipei",
   "totalCount": 2303,
@@ -106,9 +106,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": 10243611,
-        "trustNet": 185000,
+        "trustNet": 641000,
         "dealerNet": 0,
-        "totalNet": 14183707,
+        "totalNet": 14639707,
         "volumeMA5": 907673707,
         "volumeMA20": 497421874
       },
@@ -2038,9 +2038,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": 11768117,
-        "trustNet": -27212763,
+        "trustNet": -26375763,
         "dealerNet": 0,
-        "totalNet": -11518600,
+        "totalNet": -10681600,
         "volumeMA5": 359791772,
         "volumeMA20": 347191335
       },
@@ -2245,9 +2245,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": -16919451,
-        "trustNet": 36974644,
+        "trustNet": 37035644,
         "dealerNet": 0,
-        "totalNet": 21009709,
+        "totalNet": 21070709,
         "volumeMA5": 319116539,
         "volumeMA20": 264340460
       },
@@ -8036,9 +8036,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": 12080594,
-        "trustNet": -13091000,
+        "trustNet": -13233000,
         "dealerNet": 0,
-        "totalNet": -910517,
+        "totalNet": -1052517,
         "volumeMA5": 42684161,
         "volumeMA20": 37202859
       },
@@ -8795,9 +8795,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": -1201611,
-        "trustNet": 2567414,
+        "trustNet": 3176414,
         "dealerNet": 0,
-        "totalNet": 1652874,
+        "totalNet": 2261874,
         "volumeMA5": 28542811,
         "volumeMA20": 17380006
       },
@@ -9145,6 +9145,75 @@
         "totalNet": null,
         "volumeMA5": 0,
         "volumeMA20": 0
+      },
+      "score": 5
+    },
+    {
+      "market": "TWSE",
+      "marketName": "上市",
+      "securityType": "STOCK",
+      "code": "3443",
+      "name": "創意",
+      "open": 4725,
+      "high": 4880,
+      "low": 4615,
+      "close": 4880,
+      "change": 155,
+      "changePercent": 3.28,
+      "volume": 1747105,
+      "amount": 8295987820,
+      "transactions": 7455,
+      "technical": {
+        "rsAbove90": false,
+        "nearHigh22": false,
+        "maShortBull": true,
+        "maMidBull": false,
+        "aboveDeduction": false
+      },
+      "fundamental": {
+        "revenueHigh": true,
+        "revenueYoY2M": true,
+        "revenueMoM2M": false,
+        "marginGrowth": false,
+        "profitable": false
+      },
+      "chip": {
+        "majorHolderIncrease": false,
+        "brokerDiffNegative": false,
+        "foreignBuy": false,
+        "trustBuy": true,
+        "largeHolderRatioUp": false,
+        "institutionalQuarterHigh": true
+      },
+      "indicators": {
+        "rs": 22,
+        "return20": -4.31,
+        "ma5": 4816,
+        "ma10": 4737.5,
+        "ma20": 4581.25,
+        "ma60": null,
+        "ma120": null,
+        "high22": 5620,
+        "historyDays": 24
+      },
+      "fundamentalMetrics": {
+        "revenuePeriod": "2026-05",
+        "revenue": 4674012,
+        "revenueYoY": 132.1328905238472,
+        "revenueMoM": 8.849000461803623,
+        "netIncome": null,
+        "eps": null,
+        "grossMargin": null,
+        "operatingMargin": null
+      },
+      "chipMetrics": {
+        "chipDate": "2026-06-25",
+        "foreignNet": -43622,
+        "trustNet": 241496,
+        "dealerNet": 0,
+        "totalNet": 145482,
+        "volumeMA5": 3217815,
+        "volumeMA20": 2857153
       },
       "score": 5
     },
@@ -10658,9 +10727,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": 66257,
-        "trustNet": 21000,
+        "trustNet": 168000,
         "dealerNet": 0,
-        "totalNet": 89454,
+        "totalNet": 236454,
         "volumeMA5": 1358754,
         "volumeMA20": 1366265
       },
@@ -19622,75 +19691,6 @@
         "totalNet": -3000,
         "volumeMA5": 73762,
         "volumeMA20": 65197
-      },
-      "score": 4
-    },
-    {
-      "market": "TWSE",
-      "marketName": "上市",
-      "securityType": "STOCK",
-      "code": "3443",
-      "name": "創意",
-      "open": 4725,
-      "high": 4880,
-      "low": 4615,
-      "close": 4880,
-      "change": 155,
-      "changePercent": 3.28,
-      "volume": 1747105,
-      "amount": 8295987820,
-      "transactions": 7455,
-      "technical": {
-        "rsAbove90": false,
-        "nearHigh22": false,
-        "maShortBull": true,
-        "maMidBull": false,
-        "aboveDeduction": false
-      },
-      "fundamental": {
-        "revenueHigh": true,
-        "revenueYoY2M": true,
-        "revenueMoM2M": false,
-        "marginGrowth": false,
-        "profitable": false
-      },
-      "chip": {
-        "majorHolderIncrease": false,
-        "brokerDiffNegative": false,
-        "foreignBuy": false,
-        "trustBuy": true,
-        "largeHolderRatioUp": false,
-        "institutionalQuarterHigh": false
-      },
-      "indicators": {
-        "rs": 22,
-        "return20": -4.31,
-        "ma5": 4816,
-        "ma10": 4737.5,
-        "ma20": 4581.25,
-        "ma60": null,
-        "ma120": null,
-        "high22": 5620,
-        "historyDays": 24
-      },
-      "fundamentalMetrics": {
-        "revenuePeriod": "2026-05",
-        "revenue": 4674012,
-        "revenueYoY": 132.1328905238472,
-        "revenueMoM": 8.849000461803623,
-        "netIncome": null,
-        "eps": null,
-        "grossMargin": null,
-        "operatingMargin": null
-      },
-      "chipMetrics": {
-        "chipDate": "2026-06-25",
-        "foreignNet": -43622,
-        "trustNet": 195496,
-        "dealerNet": 0,
-        "totalNet": 99482,
-        "volumeMA5": 3217815,
-        "volumeMA20": 2857153
       },
       "score": 4
     },
@@ -34937,9 +34937,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": -6103672,
-        "trustNet": 174060,
+        "trustNet": 179060,
         "dealerNet": 0,
-        "totalNet": -6240050,
+        "totalNet": -6235050,
         "volumeMA5": 50403095,
         "volumeMA20": 46072477
       },
@@ -35144,9 +35144,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": 260089,
-        "trustNet": -241276,
+        "trustNet": -249276,
         "dealerNet": 0,
-        "totalNet": 22348,
+        "totalNet": 14348,
         "volumeMA5": 2214390,
         "volumeMA20": 2880563
       },
@@ -35696,9 +35696,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": 1362548,
-        "trustNet": -1758409,
+        "trustNet": -1688793,
         "dealerNet": 0,
-        "totalNet": -412774,
+        "totalNet": -343158,
         "volumeMA5": 14492571,
         "volumeMA20": 14476072
       },
@@ -55350,7 +55350,7 @@
         "operatingMargin": null
       },
       "chipMetrics": {
-        "chipDate": "2026-06-24",
+        "chipDate": "2026-06-25",
         "foreignNet": 0,
         "trustNet": 0,
         "dealerNet": 0,
@@ -55826,7 +55826,7 @@
         "operatingMargin": null
       },
       "chipMetrics": {
-        "chipDate": "2026-06-24",
+        "chipDate": "2026-06-25",
         "foreignNet": 0,
         "trustNet": 0,
         "dealerNet": 0,
@@ -70586,9 +70586,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": -1291867,
-        "trustNet": -3503000,
+        "trustNet": -3501588,
         "dealerNet": 0,
-        "totalNet": -4924337,
+        "totalNet": -4922925,
         "volumeMA5": 36095554,
         "volumeMA20": 37559586
       },
@@ -71000,9 +71000,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": -309524,
-        "trustNet": -352952,
+        "trustNet": -369952,
         "dealerNet": 0,
-        "totalNet": -588188,
+        "totalNet": -605188,
         "volumeMA5": 3773234,
         "volumeMA20": 3517082
       },
@@ -102309,7 +102309,7 @@
         "operatingMargin": null
       },
       "chipMetrics": {
-        "chipDate": "2026-06-24",
+        "chipDate": "2026-06-25",
         "foreignNet": 0,
         "trustNet": 0,
         "dealerNet": 0,
@@ -120949,9 +120949,9 @@
       "chipMetrics": {
         "chipDate": "2026-06-25",
         "foreignNet": -124926,
-        "trustNet": -241038,
+        "trustNet": -246038,
         "dealerNet": 0,
-        "totalNet": -393165,
+        "totalNet": -398165,
         "volumeMA5": 4982685,
         "volumeMA20": 3575696
       },
@@ -143229,7 +143229,7 @@
         "operatingMargin": null
       },
       "chipMetrics": {
-        "chipDate": "2026-06-24",
+        "chipDate": "2026-06-25",
         "foreignNet": 0,
         "trustNet": 0,
         "dealerNet": 0,
